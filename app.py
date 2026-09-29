@@ -1,13 +1,7 @@
 import streamlit as st
-from dotenv import load_dotenv
-import os
 from google import genai
-
-# Load .env file
-load_dotenv()
-
 # Get API Key
-api_key = os.getenv("GEMINI_API_KEY")
+api_key = st.secrets["GEMINI_API_KEY"]
 
 # Create Gemini Client
 client = genai.Client(api_key=api_key)
@@ -73,7 +67,7 @@ if st.button("Generate Response"):
     if prompt:
         with st.spinner("Gemini is thinking..."):
             response = client.models.generate_content(
-                model="gemini-3.5-flash",
+                model="gemini-2.5-flash",
                 contents=prompt
             )
 
